@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>popup页</title>
+    <meta charset="utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+</head>
+<script type="text/javascript" src="js/jquery-1.8.3.js"></script>
+<script>
+    function crosRequest() {
+        window.postMessage({
+            msg: '发一个测试消息',
+            url: $("#urlInput").val(),
+            dom: "crosResult"
+        }, '*');
+    }
+
+    function testInject() {
+        var crosFunc = eval("crosTest");
+        if (typeof crosFunc == "function") {
+            crosTest();
+        }
+    }
+</script>
+<body>
+<button onclick="testInject()">测试注入js</button>
+<br>
+<input id="urlInput" type="text" value="https://www.baidu.com">
+<button onclick="crosRequest()">测试cros请求</button>
+<div>
+    响应结果：
+    <div id="crosResult"></div>
+</div>
+</body>
+</html>
